@@ -1,0 +1,154 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <meta charset="UTF-8">
+    <title>Apply Leave</title>
+        <div class="content-section">
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="row">
+
+            <fieldset class="form-group">
+               {# <legend class="border-bottom mb-4">Leave Start Date</legend>#}
+                <div class="form-group">
+
+
+                    {{ form.date.label(class="form-control-label") }}
+                    {% if form.date.errors %}
+                        {{ form.date(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.date(class="form-control form-control-lg") }}
+                    {% endif %}
+                    <a href="#" class="border-bottom mb-4"
+       onClick="setYears(1947, 2099);
+       showCalender(this, 'date');">
+                        <img src="static/calender.png"></a>
+
+                                   {# <legend class="border-bottom mb-4">Leave End Date</legend>#}
+                <div class="form-group">
+
+
+                    {{ form.enddate.label(class="form-control-label") }}
+                    {% if form.enddate.errors %}
+                        {{ form.enddate(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.enddate.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.enddate(class="form-control form-control-lg") }}
+                    {% endif %}
+                    <a href="#" class="border-bottom mb-4"
+       onClick="setYears(1947, 2099);
+       showCalender(this, 'enddate');">
+                        <img src="static/calender.png"></a>
+
+
+
+                      <table id="calenderTable">
+       <tbody id="calenderTableHead">
+         <tr>
+           <td colspan="4" align="center">
+	     <select onChange="showCalenderBody(
+                   createCalender(document.getElementById('selectYear').value,
+	           this.selectedIndex, false));"
+                   id="selectMonth">
+	              <option value="0">Jan</option>
+	              <option value="1">Feb</option>
+	              <option value="2">Mar</option>
+	              <option value="3">Apr</option>
+	              <option value="4">May</option>
+	              <option value="5">Jun</option>
+	              <option value="6">Jul</option>
+	              <option value="7">Aug</option>
+	              <option value="8">Sep</option>
+	              <option value="9">Oct</option>
+	              <option value="10">Nov</option>
+	              <option value="11">Dec</option>
+	          </select>
+            </td>
+            <td colspan="2" align="center">
+	    <select onChange="showCalenderBody(createCalender(this.value,
+	      document.getElementById('selectMonth').selectedIndex, false));"
+              id="selectYear">
+	    </select>
+			</td>
+           <td align="center">
+	    <a href="#" onClick="closeCalender();">
+              <font color="#003333" size="+1">X</font>
+            </a>
+	   </td>
+	</tr>
+       </tbody>
+       <tbody id="calenderTableDays">
+         <tr style="">
+           <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td>
+           <td>Thu</td><td>Fri</td><td>Sat</td>
+         </tr>
+       </tbody>
+       <tbody id="calender"></tbody>
+    </table>
+
+                </div>
+                    <form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.leavetype(style="list-style:none") }}
+                        </form>
+                        <div>
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+                </div>
+                </fieldset>
+                <div>
+                     <table class="table table-sm table-bordered">
+                        <tr>
+                            <td><b>Available Leaves</b></td> <td> {{y}}</td></tr></table>
+{#                           {% c=Leaves.query.filter(user_id=current_user.id).all() %}
+                            {% for i in leavespending %}
+                                {% print(leavespending[-1].pending_leaves) %}
+                            {% endfor %}#}
+                    <table class="table table-sm table-bordered">
+                        <tr>
+                            <td><b>Start Date</b></td>
+                            <td><b>End Date</b></td>
+                            <td><b>Applied Leaves</b></td>
+                            <td><b>Leave Type</b></td>
+                            <td><b>Approval Status</b></td>
+
+                </tr>
+    {% for summary in leaveall%}
+                <tr>
+                    <td>{{summary.startdate}}</td>
+                    <td>{{summary.enddate}}</td>
+                    <td>{{summary.applied_leaves}}</td>
+                    <td>{{summary.leave_type}}</td>
+                    <td>{{summary.approved}}</td>
+
+                </tr>
+
+
+                {%endfor%}</table></div>
+   <meta http-equiv="Content-Type" content="text/html;">
+   <script language="javaScript"
+    type="text/javascript" src="static/calendar.js"></script>
+   <link href="static/calendar.css" rel="stylesheet" type="text/css">
+            </div>
+
+        <div class="form-check">
+
+
+
+</form>
+        </div>
+      </div>
+
+
+{% endblock content %}

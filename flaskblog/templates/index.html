@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+          <div class="form-group">
+              <h1   style="font-size:40px;">Contact Information</h1>
+<div class="dropdown-divider"></div>
+              <div class="form-group row">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8"><h2>Employee <b>Details</b></h2></div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                 <style>
+                 table {border-collapse:collapse; table-layout:fixed; width:310px;}
+                 table td {border:solid 1px #fab; width:100px; word-wrap:break-word;}
+                 </style>
+                    <tr>
+                        <th>#</th>
+                        <th>User Name</th>
+                        <th>User Email</th>
+                        <th>Manager Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+		{% for x in range(0, usLi|length)%}
+                    <tr>
+                        <td><span style="max-width:25px;">{{ x+1 }}</span></td>
+                        <td><span style="max-width:50px;">{{ usLi[x].username }}</span></td>
+                        <td> <span style="max-width:150px;">{{ usLi[x].email }}</span></td>
+                        <td><span style="max-width:150px;">{{ usLi[x].manager_byemail }}</span></td>
+                        {#<td>{{ Role.query.filter_by(id=usLi[x].role_id).first().name }}</td>
+                        <td>{% for do in Docs.query.filter_by(user_id=usLi[x].id).all() %}
+                            <a class ='btn btn-sm btn-outline-info mb-1' href="/static/documents/{{ do.document }}">{{ do.document[16:20] }}</a>
+                            {% endfor %}</td>#}
+                    </tr>
+        {% endfor %}
+                 </tbody>
+            </table>
+        </div>
+</div>
+  </div>
+         <div class="form-group">
+                    {{ form.emp_email.label(class="form-control-label") }}
+                    {{ form.emp_email(class="form-control form-control-lg") }}
+              <div class="form-group">
+                    {{ form.manager.label(class="form-control-label") }}
+                    {{ form.manager(class="form-control form-control-lg") }}
+      </div>
+             </div>
+  <button class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}</button>
+    </form>
+</div>
+
+{% endblock content %}

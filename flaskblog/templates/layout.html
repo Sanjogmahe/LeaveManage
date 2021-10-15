@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    {% if title %}
+        <title> Ineuron - {{ title }}</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% else %}
+        <title>Ineuron</title>
+         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+<!--          <a class="navbar-brand mr-4" href="/"><img alt="Responsive image" width="100" height="40" src="/static/profile_pics/AllianzLogo.png"></a>-->
+          <a class="navbar-brand mr-4" href="/"><img alt="Responsive image" width="100" height="40" src="/static/profile_pics/Ineuron.png"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              {% if current_user.is_authenticated %}
+              <img alt="Responsive image" class="rounded-circle" width="40" height="40" src="/static/profile_pics/{{ current_user.image_file }}">
+              <a class="nav-item nav-link" href="{{ url_for('main.dehome') }}">Welcome {{ current_user.username.split()[0] }} </a>
+              {% else %}
+              <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Home</a>
+              {% endif %}
+              <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
+
+
+                {#<input name="search" style="margin-top: 2px; margin-left: 200px;" type="text" placeholder="Search..">#}
+
+
+
+
+
+            </div>
+            <div class="navbar-nav">
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('leave.new_post') }}">New Post</a>
+                <a class="nav-item nav-link" href="{{ url_for('leave.leave_summary') }}">Leaves</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    {#<div class="row">
+      {% if current_user.is_authenticated %}
+    <div class="col-auto">
+          <div class="content-section">
+
+              <h3>Action</h3>
+              <div class="dropdown-divider"></div>
+              <ul class="list-group">
+
+
+
+
+              <div class="btn-group dropright">
+              <button type="button" class="btn bg-secondary
+               text-white text-justify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Requester Details
+              </button>
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <span class="sr-only">Toggle Dropright</span>
+              </button>
+              <div class="dropdown-menu">
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Details Form</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.AppOv') }}">Application Overview</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.contact') }}">Contact Matrix</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.upload') }}">Transaction Load Detail</a></li>
+
+                  </div>
+              </div>
+              <div class="dropdown-divider"></div>
+                <div class="btn-group dropright">
+              <button type="button" class="btn bg-secondary
+               text-white text-justify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Application Overview
+              </button>
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <span class="sr-only">Toggle Dropright</span>
+              </button>
+              <div class="dropdown-menu">
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wix</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Jimdo</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Squarespace</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Site123</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wordpress</a></li>
+                  </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="btn-group dropright">
+              <button type="button" class="btn bg-secondary
+               text-white text-justify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Architectural Overview
+              </button>
+                   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <span class="sr-only">Toggle Dropright</span>
+              </button>
+              <div class="dropdown-menu">
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wix</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Jimdo</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Squarespace</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Site123</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wordpress</a></li>
+                  </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="btn-group dropright">
+              <button type="button" class="btn bg-secondary
+               text-white text-justify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Contact  Matrix
+              </button>
+                   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <span class="sr-only">Toggle Dropright</span>
+              </button>
+              <div class="dropdown-menu">
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wix</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Jimdo</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Squarespace</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Site123</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wordpress</a></li>
+                  </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="btn-group dropright">
+              <button type="button" class="btn bg-secondary
+               text-white text-justify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Transaction load details
+              </button>
+                   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <span class="sr-only">Toggle Dropright</span>
+              </button>
+              <div class="dropdown-menu">
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wix</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Jimdo</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Squarespace</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Site123</a></li>
+                <li><a class="btn text-secondary dropdown-item" href="{{ url_for('posts.new_requirement') }}">Wordpress</a></li>
+                  </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              {% endif %}
+
+          </div>#}
+        </div>
+    <main role="main" class="container">
+
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+              {% block content %}{% endblock %}
+
+        </div>
+          {#{% if current_user.is_authenticated %}#}
+        <div class="col-md-4">
+          <div class="content-section">
+
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+           {#{% endif %}#}
+      </div>
+
+
+      </main>
+      </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="/static/clock.js"></script>
+
+    <script src="/static/table.js"></script>
+    <script src="/static/calender.js"></script>
+</body>
+</html>

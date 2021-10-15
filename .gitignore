@@ -1,0 +1,8 @@
+# Log file
+*.log
+
+#pytest-cache
+/.pytest_cache
+
+#pycharm
+/.idea
