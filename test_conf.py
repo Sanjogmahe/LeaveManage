@@ -3,11 +3,11 @@
 # import os
 # import joblib
 import pytest
-from flask import Flask, url_for
-from flaskblog.main.routes import main
+# from flask import Flask, url_for
+# from flaskblog.main.routes import main
 from flaskblog import create_app
-import tempfile
-from flask_sqlalchemy import SQLAlchemy
+# import tempfile
+# from flask_sqlalchemy import SQLAlchemy
 # from flaskblog import init_db
 import os
 
