@@ -9,7 +9,6 @@ from flaskblog.models import User, Post, Role
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm,SuperuserForm)
 from flaskblog.users.utils import save_picture, send_reset_email
-import cv2
 import logging
 
 # logging.basicConfig(filename='register.log',level=logging.INFO,format='%(asctime)s:%(name)s:%(message)s')
