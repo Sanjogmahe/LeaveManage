@@ -14,7 +14,6 @@ from flaskblog.users.utils import save_document
 import pytz
 import time
 #NewRequirement,AppOver,ContactMat,TestRun,CombinedForm
-from bs4 import BeautifulSoup
 
 
 TZ = []

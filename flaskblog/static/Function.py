@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from selenium.webdriver.common.action_chains import ActionChains
 import pandas as pd
 import re
