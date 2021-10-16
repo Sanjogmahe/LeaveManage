@@ -84,6 +84,6 @@ print(__name__)
 
 if __name__ == '__main__':# on app.py call app.run is called# main file
     # import test
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
 
